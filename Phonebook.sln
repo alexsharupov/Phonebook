@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34302.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook", "Phonebook\Phonebook.csproj", "{29693F1A-CA14-4C3A-A7FE-43970C42C38B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{15BFD3DD-FDBE-4E73-A46E-569D4FC3BF40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29693F1A-CA14-4C3A-A7FE-43970C42C38B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29693F1A-CA14-4C3A-A7FE-43970C42C38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29693F1A-CA14-4C3A-A7FE-43970C42C38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29693F1A-CA14-4C3A-A7FE-43970C42C38B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15BFD3DD-FDBE-4E73-A46E-569D4FC3BF40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15BFD3DD-FDBE-4E73-A46E-569D4FC3BF40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15BFD3DD-FDBE-4E73-A46E-569D4FC3BF40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15BFD3DD-FDBE-4E73-A46E-569D4FC3BF40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B691442-D7A5-4877-AFB1-0DDBBDCEAD73}
+	EndGlobalSection
+EndGlobal
