@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34302.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook", "Phonebook\Phonebook.csproj", "{29693F1A-CA14-4C3A-A7FE-43970C42C38B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phonebook", "Phonebook\Phonebook.csproj", "{29693F1A-CA14-4C3A-A7FE-43970C42C38B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4B53F7AA-AD6B-4F34-AC9A-C8819D30C33F} = {4B53F7AA-AD6B-4F34-AC9A-C8819D30C33F}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{15BFD3DD-FDBE-4E73-A46E-569D4FC3BF40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "DataBase\DataBase.csproj", "{4B53F7AA-AD6B-4F34-AC9A-C8819D30C33F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +20,10 @@ Global
 		{29693F1A-CA14-4C3A-A7FE-43970C42C38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29693F1A-CA14-4C3A-A7FE-43970C42C38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29693F1A-CA14-4C3A-A7FE-43970C42C38B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15BFD3DD-FDBE-4E73-A46E-569D4FC3BF40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15BFD3DD-FDBE-4E73-A46E-569D4FC3BF40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15BFD3DD-FDBE-4E73-A46E-569D4FC3BF40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15BFD3DD-FDBE-4E73-A46E-569D4FC3BF40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B53F7AA-AD6B-4F34-AC9A-C8819D30C33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B53F7AA-AD6B-4F34-AC9A-C8819D30C33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B53F7AA-AD6B-4F34-AC9A-C8819D30C33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B53F7AA-AD6B-4F34-AC9A-C8819D30C33F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
