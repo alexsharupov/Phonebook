@@ -11,11 +11,11 @@ using Microsoft.Extensions.Logging;
 
 namespace DataBase.Http
 {
-    class ResultRequest {
+    public class ResultRequest {
         public List<RandomUser> results { get; set; }
     }
 
-    internal class UsersGet :IUsersWork
+    public class UsersGet :IUsersWork
     {
         private readonly HttpClient _httpClient;
         private readonly JsonSerializerOptions _jsonSerializerOptions;
