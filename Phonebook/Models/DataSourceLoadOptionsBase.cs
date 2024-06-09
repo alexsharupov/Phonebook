@@ -1,0 +1,140 @@
+﻿using System.Collections;
+using System.ComponentModel;
+using System.Globalization;
+
+namespace Phonebook.Models
+{
+    public class DataSourceLoadOptionsBase
+    {
+        /// <summary>
+        /// A global default value for the <see cref="P:DevExtreme.AspNet.Data.DataSourceLoadOptionsBase.StringToLower" /> property
+        /// </summary>
+        public static bool? StringToLowerDefault { get; set; }
+
+        /// <summary>
+        /// A flag indicating whether the total number of data objects is required.
+        /// </summary>
+        public bool RequireTotalCount { get; set; }
+
+        /// <summary>
+        /// A flag indicating whether the number of top-level groups is required.
+        /// </summary>
+        public bool RequireGroupCount { get; set; }
+
+        /// <summary>
+        /// A flag indicating whether the current query is made to get the total number of data objects.
+        /// </summary>
+        public bool IsCountQuery { get; set; }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool IsSummaryQuery { get; set; }
+
+        /// <summary>
+        /// The number of data objects to be skipped from the start of the resulting set.
+        /// </summary>
+        public int Skip { get; set; }
+
+        /// <summary>The number of data objects to be loaded.</summary>
+        public int Take { get; set; }
+
+        /// <summary>A sort expression.</summary>
+        public SortingInfo[] Sort { get; set; }
+
+        /// <summary>A group expression.</summary>
+        public GroupingInfo[] Group { get; set; }
+
+        /// <summary>A filter expression.</summary>
+        public IList Filter { get; set; }
+
+        /// <summary>A total summary expression.</summary>
+        public SummaryInfo[] TotalSummary { get; set; }
+
+        /// <summary>A group summary expression.</summary>
+        public SummaryInfo[] GroupSummary { get; set; }
+
+        /// <summary>A select expression.</summary>
+        public string[] Select { get; set; }
+
+        /// <summary>
+        /// An array of data fields that limits the <see cref="P:DevExtreme.AspNet.Data.DataSourceLoadOptionsBase.Select" /> expression.
+        /// The applied select expression is the intersection of <see cref="P:DevExtreme.AspNet.Data.DataSourceLoadOptionsBase.PreSelect" /> and <see cref="P:DevExtreme.AspNet.Data.DataSourceLoadOptionsBase.Select" />.
+        /// </summary>
+        public string[] PreSelect { get; set; }
+
+        /// <summary>
+        /// A flag that indicates whether the LINQ provider should execute the select expression.
+        /// If set to false, the select operation is performed in memory.
+        /// </summary>
+        public bool? RemoteSelect { get; set; }
+
+        /// <summary>
+        /// A flag that indicates whether the LINQ provider should execute grouping.
+        /// If set to false, the entire dataset is loaded and grouped in memory.
+        /// </summary>
+        public bool? RemoteGrouping { get; set; }
+
+        public bool? ExpandLinqSumType { get; set; }
+
+        /// <summary>An array of primary keys.</summary>
+        public string[] PrimaryKey { get; set; }
+
+        /// <summary>The data field to be used for sorting by default.</summary>
+        public string DefaultSort { get; set; }
+
+        /// <summary>
+        /// A flag that indicates whether filter expressions should include a ToLower() call that makes string comparison case-insensitive.
+        /// Defaults to true for LINQ to Objects, false for any other provider.
+        /// </summary>
+        public bool? StringToLower { get; set; }
+
+        /// <summary>
+        /// If this flag is enabled, keys and data are loaded via separate queries. This may result in a more efficient SQL execution plan.
+        /// </summary>
+        public bool? PaginateViaPrimaryKey { get; set; }
+
+        public bool? SortByPrimaryKey { get; set; }
+
+        public bool AllowAsyncOverSync { get; set; }
+    }
+
+    public class SortingInfo
+    {
+        /// <summary>The data field to be used for sorting.</summary>
+        public string Selector { get; set; }
+
+        /// <summary>
+        /// A flag indicating whether data should be sorted in a descending order.
+        /// </summary>
+        public bool Desc { get; set; }
+    }
+    public class GroupingInfo : SortingInfo
+    {
+        /// <summary>
+        /// A value that groups data in ranges of a given length or date/time period.
+        /// </summary>
+        public string GroupInterval { get; set; }
+
+        /// <summary>
+        /// A flag indicating whether the group's data objects should be returned.
+        /// </summary>
+        public bool? IsExpanded { get; set; }
+
+        /// <summary>
+        /// Returns the value of the IsExpanded field or <c>true</c> if this value is <c>null</c>.
+        /// </summary>
+        /// <returns>The value of the IsExpanded field or <c>true</c> if this value is <c>null</c>.</returns>
+        public bool GetIsExpanded() => !this.IsExpanded.HasValue || this.IsExpanded.Value;
+    }
+
+    public class SummaryInfo
+    {
+        /// <summary>The data field to be used for calculating the summary.</summary>
+        public string Selector { get; set; }
+
+        /// <summary>
+        /// An aggregate function: "sum", "min", "max", "avg", or "count".
+        /// </summary>
+        public string SummaryType { get; set; }
+    }
+
+}

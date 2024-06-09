@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/23.2.6/css/dx.light.css">
+
+    <!-- DevExtreme libraries (reference only one of them) -->
+    <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/23.2.6/js/dx.all.js"></script>
+    <script src="https://cdn3.devexpress.com/jslib/23.2.6/js/localization/dx.messages.ru.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
+    <meta charset="utf-8" />
+    <title>RandomUserView</title>
+</head>
+<body class="dx-viewport">
+    <div class="container">
+        <div id="gridContainer"></div>
+    </div>
+    <script>
+        DevExpress.localization.locale(navigator.language);
+
+        $(() => {
+         
+            $('#gridContainer').dxDataGrid({
+                dataSource: new DevExpress.data.CustomStore({
+                    key: 'userid',
+                    load: async (loadOptions) => await axios.post('/api/users', loadOptions).then(response => response.data)
+                }),
+                toolbar: {
+                    //
+                    items: [
+                        {
+                            location: 'before',
+                            template() {
+                                return $('<h3>')
+                                    .addClass('informer')
+                                    .text('Random Users')
+                            }
+                        },
+                        {
+                            location: 'after',
+                            widget: 'dxButton',
+                            options: {
+                                text: 'Yandex Auth2.0 Тест',
+                                elementAttr: {
+                                    class: "btn_grid"
+                                },
+                                width: 136,
+                                //Должен быть редирект на другую страницу, там ловим этот токен и по токену, запрашиваем инфу по пользователю
+                                onClick(e) {
+                                    window.open('https://oauth.yandex.ru/authorize?response_type=token&client_id=77dfa5baf79a4df8af5d13083691282c', "SwaggerRandowUsers")
+                                },
+                            },
+                        },
+                        {
+                            location: 'after',
+                            widget: 'dxButton',
+                            options: {
+                                text: 'Swagger',
+                                elementAttr: {
+                                    class: "btn_grid"
+                                },
+                                width: 136,
+                                onClick(e) {
+                                    window.open('/swagger', "SwaggerRandowUsers")
+                                },
+                            },
+                        },
+                    ]
+                },
+                paging: {
+                    pageSize: 10,
+                },
+                pager: {
+                    showPageSizeSelector: true,
+                    allowedPageSizes: [10, 25, 50, 100],
+                },
+                allowFiltering: false,
+                remoteOperations: true,
+                allowColumnReordering: true,
+                rowAlternationEnabled: true,
+                showBorders: true,
+                width: '100%',
+                columns: [
+                    {
+                        with: 100,
+                        dataField: 'thumbnail',
+                        caption: 'Фото',
+                        dataType: 'string',
+                        alignment: 'left',
+                        allowFiltering: false,
+                        allowSorting: false,
+                        cellTemplate(container, options) {
+                            $('<div>')
+                                .append($('<img>', { src: options.value }))
+                                .appendTo(container);
+                        },
+                    },
+                    {
+                        dataField: 'gender',
+                        caption: 'Пол',
+                        dataType: 'string',
+                        alignment: 'left',
+                    },
+                    {
+                        dataField: 'fullName',
+                        caption: 'ФИО',
+                        dataType: 'string',
+                        alignment: 'right',
+                    },
+                    {
+                        dataField: 'password',
+                        dataType: 'string',
+                        caption: 'Пароль',
+                    },
+                    {
+                        dataField: 'age',
+                        dataType: 'number',
+                        caption: 'Возраст',
+                    },
+                    {
+                        dataField: 'registeredDate',
+                        dataType: 'datetime',
+                        caption: 'Дата регистрации',
+                    },
+                ],
+            });
+        });
+    </script>
+    <style>
+        html, body {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .btn_grid {
+            margin: 4px;
+        }
+
+        #gridContainer {
+            height: 100%;
+        }
+
+            #gridContainer .informer {
+               margin-top: 4px;
+            }
+
+        .container {
+            height: 100%;
+        }
+
+        .dx-datagrid .dx-data-row > td.bullet {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    </style>
+</body>
+</html>

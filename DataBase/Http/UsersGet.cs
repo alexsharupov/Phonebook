@@ -1,5 +1,4 @@
-﻿using DataBase.Http.Exception;
-using Database.Models;
+﻿using Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +21,11 @@ namespace DataBase.Http
         private readonly JsonSerializerOptions _jsonSerializerOptions;
         private readonly ILogger _logger;
 
-        public UsersGet(HttpClient httpClient)
+        public UsersGet(HttpClient httpClient, ILogger<UsersGet> logger)
         {
             _httpClient = httpClient;
             _jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
-         //   _logger = logger;
+            _logger = logger;
         }
 
         public async Task<List<RandomUserEntity>> GetUsers(int countUsers)
@@ -35,41 +34,42 @@ namespace DataBase.Http
             return _context.Users.Take(countUsers).ToList<RandomUserEntity>();
         }
 
+        public static ResultRequest ConvertRequest(string? body, JsonSerializerOptions options) => JsonSerializer.Deserialize<ResultRequest>(body, options);
+
         public async Task<List<RandomUser>> SaveUsers(int countUsers = 10)
         {
 
             try
             {
-                using var response = await _httpClient.GetAsync($"?nat=us&results={countUsers}");
+                _logger.LogInformation($"Запрос данных");
+                //Нам же не нужны лишние данные
+                using var response = await _httpClient.GetAsync($"?nat=us&exc=location,email,dob,phone,cell,id,nat&results={countUsers}");
                 if (!response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine($"Error: {response.StatusCode}");
+                    _logger.LogInformation($"Error: {response.StatusCode}");
                 }
                 response.EnsureSuccessStatusCode();
                 var responseBody = await response.Content.ReadAsStringAsync();
-                var users = JsonSerializer.Deserialize<ResultRequest>(responseBody, _jsonSerializerOptions);
-
-                return users.results;
+                return ConvertRequest(responseBody, _jsonSerializerOptions).results;
 
             }
             catch (HttpRequestException e)
             {
-                Console.WriteLine($"Request error: {e.Message}");
-              //  throw new HttpUserRequestException(e);
+                _logger.LogInformation($"Request error: {e.Message}");
             }
             catch (TaskCanceledException e) {
                 if (e.CancellationToken.IsCancellationRequested)
                 {
-                    Console.WriteLine("Request was canceled.");
+                    _logger.LogInformation("Request was canceled.");
                 }
                 else
                 {
-                    Console.WriteLine("Request timed out.");
+                    _logger.LogInformation("Request timed out.");
                 }
             }
             catch (InvalidOperationException e)
             {
-
+                _logger.LogInformation($"InvalidOperationException: {e.Message}");
             }
             return null;
 
